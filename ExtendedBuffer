@@ -1,0 +1,46 @@
+#include <iostream>
+#include <cstdio>
+#include <string>
+using namespace std;
+template <class T>
+class extended_buffer
+{
+  protected:
+	T *buffer;
+	long long SIZE;
+
+  public:
+	extended_buffer(T config, long long size = 1)
+	{
+		SIZE = size;
+		buffer = new T[SIZE]();
+		for (long long i = 0; i < SIZE; i++)
+		{
+			buffer[i] = config;
+		}
+	}
+	extended_buffer(extended_buffer<T> &obj)
+	{
+		SIZE = obj.SIZE;
+		buffer = new T[obj.SIZE]();
+		for (long long i = 0; i < SIZE; i++)
+		{
+			buffer[i] = obj.buffer[i];
+		}
+	}
+	long long size() const
+	{
+		return SIZE;
+	}
+	void print_buffer(char sep = ' ', char end = '\n')
+	{
+		for (long long i = 0; i < SIZE; i++)
+			cout << buffer[i] << sep;
+		cout << end;
+	}
+	~extended_buffer()
+	{
+		//cout << "Finished" << endl;
+		delete[] buffer;
+	}
+};
